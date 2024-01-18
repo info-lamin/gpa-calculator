@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <title>GPA Calculator</title>
     <style>
         table,
@@ -29,17 +30,18 @@
     </style>
 </head>
 
-<body>
-    <main class="container">
+<body ng-app="myApp">
+    <main class="container" ng-controller="myCtrl">
         <div class="accordion accordion-flush" id="accordionExample">
-            <div class="accordion-item">
+            <div class="accordion-item" ng-repeat="sem in sem_data">
                 <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-controls="collapseOne">
-                        Semester #1
+                        data-bs-target="#{{'collapse-' + ($index+1)}}" aria-controls="{{'collapse-' + ($index+1)}}">
+                        Semester #{{$index + 1}}
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div id="{{'collapse-' + ($index+1)}}" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <table>
                             <thead>
@@ -49,1143 +51,16 @@
                                 <th>Grade</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Communicative English 1</td>
-                                    <td>21ENT11</td>
-                                    <td>3</td>
+                                <tr ng-repeat="subject in sem">
+                                    <td>{{subject.name}}</td>
+                                    <td>{{subject.course_code}}</td>
+                                    <td>{{subject.credit}}</td>
                                     <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Engineering Mathematics 1</td>
-                                    <td>21MAT11</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Engineering Physics</td>
-                                    <td>21PHT11</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Engineering Chemistry</td>
-                                    <td>21CYT11</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Python Programming</td>
-                                    <td>21CST13</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Engineering Graphics</td>
-                                    <td>21MEC11</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Physics and Chemistry Laboratory 1</td>
-                                    <td>21PHL11</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Python Programming</td>
-                                    <td>21CSL11</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Semester #2
-                    </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table>
-                            <thead>
-                                <th>Course Name</th>
-                                <th>Course Code</th>
-                                <th>Credits</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Communicative English 2</td>
-                                    <td>21ENT21</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Engineering Mathematics 2</td>
-                                    <td>21MAT21</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Physics for Information Sciences</td>
-                                    <td>21PHT22</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Basics of Electrical and Electronics Engineering</td>
-                                    <td>21EET11</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Programming in C</td>
-                                    <td>21ITT21</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Physics and Chemistry Laboratory 2</td>
-                                    <td>21PHL21</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>C Programming Laboratory</td>
-                                    <td>21ITL21</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Engineering Practices Laboratory</td>
-                                    <td>21EEL22</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Semester #3
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table>
-                            <thead>
-                                <th>Course Name</th>
-                                <th>Course Code</th>
-                                <th>Credits</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Discrete Mathematics</td>
-                                    <td>21MAT32</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Object Oriented Programming using Java</td>
-                                    <td>21CST33</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Data Structures</td>
-                                    <td>21CST32</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Digital Principles and System Design</td>
-                                    <td>21CSC31</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Computer Architecture</td>
-                                    <td>21ITT32</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Object Oriented Programming Laboratory</td>
-                                    <td>21CSL31</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Data Structures Laboratory</td>
-                                    <td>21CSL32</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Semester #4
-                    </button>
-                </h2>
-                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table>
-                            <thead>
-                                <th>Course Name</th>
-                                <th>Course Code</th>
-                                <th>Credits</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Probability and Statistics</td>
-                                    <td>21MAT45</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Database Management Systems</td>
-                                    <td>21CST41</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Software Engineering</td>
-                                    <td>21CST42</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Operating Systems</td>
-                                    <td>21ITT41</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Design and Analysis of Algorithms</td>
-                                    <td>21ITT42</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Object Oriented Analysis and Design</td>
-                                    <td>21CSC41</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Database Management Systems Laboratory</td>
-                                    <td>21CSL41</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Operating Systems Laboratory</td>
-                                    <td>21ITL41</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        Semester #5
-                    </button>
-                </h2>
-                <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table>
-                            <thead>
-                                <th>Course Name</th>
-                                <th>Course Code</th>
-                                <th>Credits</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Computer Networks</td>
-                                    <td>21CST21</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Web Programming</td>
-                                    <td>21MAT21</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Theory of Computations</td>
-                                    <td>21PHT22</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Exploratory Data Analysis</td>
-                                    <td>21EET11</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Cloud Computing</td>
-                                    <td>21ITT21</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Open Elective 1 (POCE / BMA)</td>
-                                    <td>21PHL21</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Computer Networks Laboratory</td>
-                                    <td>21ITL21</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Web Programming Laboratory</td>
-                                    <td>21ITL21</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        Semester #6
-                    </button>
-                </h2>
-                <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table>
-                            <thead>
-                                <th>Course Name</th>
-                                <th>Course Code</th>
-                                <th>Credits</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Artificial Intelligence</td>
-                                    <td>21CST61</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Compiler Design</td>
-                                    <td>21CST62</td>
-                                    <td>4</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mobile Application Development</td>
-                                    <td>21ITT61</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Professional Elective 3 (DSRE / ISM)</td>
-                                    <td>-</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Professional Elective 4 (DL / BTF)</td>
-                                    <td>-</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Open Elective 2 (CE / SME / 5G)</td>
-                                    <td>-</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mobile Application Development Laboratory</td>
-                                    <td>21ITL61</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mini Project</td>
-                                    <td>21CSL61</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                        Semester #7
-                    </button>
-                </h2>
-                <div id="collapseSeven" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table>
-                            <thead>
-                                <th>Course Name</th>
-                                <th>Course Code</th>
-                                <th>Credits</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Economics and Management for Engineers</td>
-                                    <td>21ITT71</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Network Security</td>
-                                    <td>21CST71</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Machine Learning</td>
-                                    <td>21CST71</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Professional Elective 5</td>
-                                    <td>-</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Professional Elective 6</td>
-                                    <td>-</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Open Elective 3</td>
-                                    <td>-</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Human Values and Professional Ethics</td>
-                                    <td>21HST71</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Network Security Laboratory</td>
-                                    <td>21CSL71</td>
-                                    <td>1</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Professional Readiness for Innovation, Employability and Entrepreneurship</td>
-                                    <td>21PRP71</td>
-                                    <td>3</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                        Semester #8
-                    </button>
-                </h2>
-                <div id="collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <table>
-                            <thead>
-                                <th>Course Name</th>
-                                <th>Course Code</th>
-                                <th>Credits</th>
-                                <th>Grade</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Intership</td>
-                                    <td>21CSL72</td>
-                                    <td>2</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Project Work</td>
-                                    <td>21CSL81</td>
-                                    <td>10</td>
-                                    <td>
-                                        <select>
-                                            <option value="0" selected>Grade</option>
-                                            <option value="10">O</option>
-                                            <option value="9">A+</option>
-                                            <option value="8">A</option>
-                                            <option value="7">B+</option>
-                                            <option value="6">B</option>
-                                            <option value="5">C</option>
-                                            <option value="0">RA/U/AB</option>
+                                        <select ng-model="subject.grade" ng-change="calc()">
+                                            <option ng-repeat="grade in grades" value="{{grade.value}}"
+                                                ng-selected="subject.grade === grade.value">
+                                                {{grade.name}}
+                                            </option>
                                         </select>
                                     </td>
                                 </tr>
@@ -1196,10 +71,7 @@
             </div>
         </div>
 
-        <div class="my-3 d-flex">
-            <button class="btn btn-primary" onclick="calc()">Calculate</button>
-            <button class="btn btn-success ms-3" onclick="save()">Save</button>
-        </div>
+        <button class="btn btn-danger my-3" ng-click="clear()">Clear All</button>
 
         <table id="result">
             <thead>
@@ -1208,105 +80,472 @@
                 <th>CGPA</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
+                <tr ng-repeat="sem in result">
+                    <td>{{sem.sem}}</td>
+                    <td>{{sem.sgpa}}</td>
+                    <td>{{sem.cgpa}}</td>
                 </tr>
             </tbody>
         </table>
     </main>
+
     <footer>
-        <p>This site is Designed & Developed by <a href="https://info-lamin.vercel.app">Lamin Muhammed M</a></p>
+        <p>
+            This site is Designed & Developed by
+            <a href="https://info-lamin.vercel.app" target="_blank">Lamin Muhammed M</a>
+        </p>
         <p>2024 Copyrights. All rights reserved.</p>
     </footer>
 
     <script>
-        window.onload = () => {
-            let marks = window.localStorage.getItem('marks')
-            if (marks) {
-                marks = JSON.parse(marks)
-                let selects = Array.from(document.getElementsByTagName('select'))
-                marks.forEach((mark, index) => {
-                    selects[index].value = mark
-                })
-                calc()
-            }
-        }
-
-        function calc() {
-            let tables = document.querySelectorAll('#accordionExample tbody')
-            let result = document.querySelectorAll("#result tr")
-            let total_gpa = 0
-            let total_credits = 0
-
-            for (let i = 1; i <= tables.length; i++) {
-                let subjects = tables[i - 1].getElementsByTagName('tr')
-                let gpa = 0
-                let credits = 0
-                Array.from(subjects).forEach((subject) => {
-                    let credit = parseInt(subject.getElementsByTagName('td')[2].innerText)
-                    let grade = subject.getElementsByTagName('select')[0].value
-                    if (grade != 0) {
-                        gpa += grade * credit;
-                        credits += credit
+        var app = angular.module('myApp', []);
+        var scope
+        app.controller('myCtrl', function ($scope) {
+            $scope.data = {
+                "1": [
+                    {
+                        "name": "Communicative English 1",
+                        "course_code": "21ENT11",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Engineering Mathematics 1",
+                        "course_code": "21MAT11",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Engineering Physics",
+                        "course_code": "21PHT11",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Engineering Chemistry",
+                        "course_code": "21CYT11",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Python Programming",
+                        "course_code": "21CST13",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Engineering Graphics",
+                        "course_code": "21MEC11",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Physics and Chemistry Laboratory 1",
+                        "course_code": "21PHL11",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Python Programming",
+                        "course_code": "21CSL11",
+                        "credit": 1,
+                        "grade": ""
                     }
-                })
-                result[i].getElementsByTagName('td')[1].innerText = ((gpa / credits) || 0).toFixed(2)
-                total_gpa += gpa
-                total_credits += credits
-                result[i].getElementsByTagName('td')[2].innerText = ((total_gpa / total_credits) || 0).toFixed(2)
+                ],
+                "2": [
+                    {
+                        "name": "Communicative English 2",
+                        "course_code": "21ENT21",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Engineering Mathematics 2",
+                        "course_code": "21MAT21",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Physics for Information Sciences",
+                        "course_code": "21PHT22",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Basics of Electrical and Electronics Engineering",
+                        "course_code": "21EET11",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Programming in C",
+                        "course_code": "21ITT21",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Physics and Chemistry Laboratory 2",
+                        "course_code": "21PHL21",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "C Programming Laboratory",
+                        "course_code": "21ITL21",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Engineering Practices Laboratory",
+                        "course_code": "21EEL22",
+                        "credit": 1,
+                        "grade": ""
+                    }
+                ],
+                "3": [
+                    {
+                        "name": "Discrete Mathematics",
+                        "course_code": "21MAT32",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Object Oriented Programming using Java",
+                        "course_code": "21CST33",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Data Structures",
+                        "course_code": "21CST32",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Digital Principles and System Design",
+                        "course_code": "21CSC31",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Computer Architecture",
+                        "course_code": "21ITT32",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Object Oriented Programming Laboratory",
+                        "course_code": "21CSL31",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Data Structures Laboratory",
+                        "course_code": "21CSL32",
+                        "credit": 1,
+                        "grade": ""
+                    }
+                ],
+                "4": [
+                    {
+                        "name": "Probability and Statistics",
+                        "course_code": "21MAT45",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Database Management Systems",
+                        "course_code": "21CST41",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Software Engineering",
+                        "course_code": "21CST42",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Operating Systems",
+                        "course_code": "21ITT41",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Design and Analysis of Algorithms",
+                        "course_code": "21ITT42",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Object Oriented Analysis and Design",
+                        "course_code": "21CSC41",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Database Management Systems Laboratory",
+                        "course_code": "21CSL41",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Operating Systems Laboratory",
+                        "course_code": "21ITL41",
+                        "credit": 1,
+                        "grade": ""
+                    }
+                ],
+                "5": [
+                    {
+                        "name": "Computer Networks",
+                        "course_code": "21CST21",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Web Programming",
+                        "course_code": "21MAT21",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Theory of Computations",
+                        "course_code": "21PHT22",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Exploratory Data Analysis",
+                        "course_code": "21EET11",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Cloud Computing",
+                        "course_code": "21ITT21",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Open Elective 1 (POCE / BMA)",
+                        "course_code": "21PHL21",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Computer Networks Laboratory",
+                        "course_code": "21ITL21",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Web Programming Laboratory",
+                        "course_code": "21ITL21",
+                        "credit": 1,
+                        "grade": ""
+                    }
+                ],
+                "6": [
+                    {
+                        "name": "Artificial Intelligence",
+                        "course_code": "21CST61",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Compiler Design",
+                        "course_code": "21CST62",
+                        "credit": 4,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Mobile Application Development",
+                        "course_code": "21ITT61",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Professional Elective 3 (DSRE / ISM)",
+                        "course_code": "-",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Professional Elective 4 (DL / BTF)",
+                        "course_code": "-",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Open Elective 2 (CE / SME / 5G)",
+                        "course_code": "-",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Mobile Application Development Laboratory",
+                        "course_code": "21ITL61",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Mini Project",
+                        "course_code": "21CSL61",
+                        "credit": 3,
+                        "grade": ""
+                    }
+                ],
+                "7": [
+                    {
+                        "name": "Economics and Management for Engineers",
+                        "course_code": "21ITT71",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Network Security",
+                        "course_code": "21CST71",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Machine Learning",
+                        "course_code": "21CST71",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Professional Elective 5",
+                        "course_code": "-",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Professional Elective 6",
+                        "course_code": "-",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Open Elective 3",
+                        "course_code": "-",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Human Values and Professional Ethics",
+                        "course_code": "21HST71",
+                        "credit": 3,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Network Security Laboratory",
+                        "course_code": "21CSL71",
+                        "credit": 1,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Professional Readiness for Innovation, Employability and Entrepreneurship",
+                        "course_code": "21PRP71",
+                        "credit": 3,
+                        "grade": ""
+                    }
+                ],
+                "8": [
+                    {
+                        "name": "Intership",
+                        "course_code": "21CSL72",
+                        "credit": 2,
+                        "grade": ""
+                    },
+                    {
+                        "name": "Project Work",
+                        "course_code": "21CSL81",
+                        "credit": 10,
+                        "grade": ""
+                    }
+                ]
             }
-        }
 
-        function save() {
-            let marks = document.getElementsByTagName('select')
-            let marks_array = []
-            Array.from(marks).forEach((mark) => {
-                marks_array.push(mark.value)
-            })
-            window.localStorage.setItem('marks', JSON.stringify(marks_array))
-            alert('Saved Successfully')
-        }
+            $scope.grades = [
+                {
+                    'value': '',
+                    'name': 'Grade'
+                },
+                {
+                    'value': '10',
+                    'name': 'O'
+                },
+                {
+                    'value': '9',
+                    'name': 'A+'
+                },
+                {
+                    'value': '8',
+                    'name': 'A'
+                },
+                {
+                    'value': '7',
+                    'name': 'B+'
+                },
+                {
+                    'value': '6',
+                    'name': 'B'
+                },
+                {
+                    'value': '5',
+                    'name': 'C'
+                },
+                {
+                    'value': '0',
+                    'name': 'RA/U/AB'
+                }
+            ]
+
+            $scope.sem_data = JSON.parse(window.localStorage.getItem('sem_data')) || $scope.data
+
+            $scope.calc = () => {
+                let data = []
+
+                let cgpa = 0
+                let total_points = 0
+                for (sem in $scope.sem_data) {
+                    let sgpa = 0
+                    let points = 0
+                    for (sub in $scope.sem_data[sem]) {
+                        let credit = $scope.sem_data[sem][sub].credit
+                        let grade = parseInt($scope.sem_data[sem][sub].grade) || 0
+
+                        if (grade != 0) {
+                            sgpa += credit * grade
+                            points += credit
+                        }
+                    }
+
+                    cgpa += sgpa
+                    total_points += points
+
+                    data.push({
+                        "sem": sem,
+                        "sgpa": ((sgpa / points) || 0).toFixed(2),
+                        "cgpa": ((cgpa / total_points) || 0).toFixed(2)
+                    })
+                }
+                $scope.result = data
+                window.localStorage.setItem('sem_data', JSON.stringify($scope.sem_data))
+            }
+
+            $scope.calc()
+
+            $scope.clear = () => {
+                $scope.sem_data = $scope.data
+                $scope.calc()
+            }
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 </body>
 
 </html>
