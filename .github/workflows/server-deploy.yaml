@@ -1,0 +1,26 @@
+name: Server Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install FTP & SSH
+        run: sudo apt-get update && sudo apt-get install -y ftp && sudo apt-get install -y openssh-client && sudo apt-get install -y sshpass && sudo apt install -y zip
+
+      - name: Transfer the files
+        run: |
+          ftp -inv ${{ vars.SSH_HOST }} << EOF
+          user ${{ secrets.SSH_USER }} ${{ secrets.SSH_USER_PASS }}
+          cd "public_html/vcet/CSE/2021 - 2025/gpa-calculator"
+          put index.html
+          quit
+          EOF
