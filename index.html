@@ -71,8 +71,6 @@
             </div>
         </div>
 
-        <button class="btn btn-danger my-3" ng-click="clear()">Clear All</button>
-
         <table id="result">
             <thead>
                 <th>Semester</th>
@@ -101,7 +99,7 @@
         var app = angular.module('myApp', []);
         var scope
         app.controller('myCtrl', function ($scope) {
-            $scope.data = {
+            $scope.sem_data = {
                 "1": [
                     {
                         "name": "Communicative English 1",
@@ -503,10 +501,18 @@
                 }
             ]
 
-            $scope.sem_data = JSON.parse(window.localStorage.getItem('sem_data')) || $scope.data
+            let local_data = JSON.parse(window.localStorage.getItem('result'))
+            if(local_data){
+                for (sem in $scope.sem_data) {
+                    for (sub in $scope.sem_data[sem]) {
+                        $scope.sem_data[sem][sub].grade = local_data[$scope.sem_data[sem][sub].course_code] || ""
+                    }
+                }
+            }
 
             $scope.calc = () => {
                 let data = []
+                let final_data = {}
 
                 let cgpa = 0
                 let total_points = 0
@@ -521,6 +527,7 @@
                             sgpa += credit * grade
                             points += credit
                         }
+                        final_data[$scope.sem_data[sem][sub].course_code] = $scope.sem_data[sem][sub].grade
                     }
 
                     cgpa += sgpa
@@ -533,15 +540,10 @@
                     })
                 }
                 $scope.result = data
-                window.localStorage.setItem('sem_data', JSON.stringify($scope.sem_data))
+                window.localStorage.setItem('result', JSON.stringify(final_data))
             }
 
             $scope.calc()
-
-            $scope.clear = () => {
-                $scope.sem_data = $scope.data
-                $scope.calc()
-            }
         });
     </script>
 
